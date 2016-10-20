@@ -1,0 +1,59 @@
+<?php
+ob_start();
+?>
+<html>
+<head>
+<style type="text/css">
+	@page {
+		background-color:#ffffff;
+		 footer: html_myFooter1;
+	}
+	
+	.altoFilas{
+		height: 3.7cm;
+	}
+	
+	.body{
+		 font: 10px Calibri; 
+	}
+</style> 	
+
+</head>
+<body>
+
+	<?php
+		view::content();
+	?>
+		
+	<htmlpagefooter name="myFooter1">		
+    	<table width="100%" style="border-top: 1px dotted grey; vertical-align: bottom; font-family: serif; font-size: 8pt;  color: #000000; font-style: italic;">
+			<tr>
+				<td width="33%"><span style="font-style: italic;">{DATE d/m/Y}</span></td>
+				<td width="33%" align="center" style="font-weight: bold; font-style: italic;"></td>
+				<td width="33%" style="text-align: right; ">{PAGENO}/{nbpg}</td>
+            </tr>
+		</table>
+	</htmlpagefooter>
+</body>
+</html>
+<?php 
+	$html = ob_get_clean();
+	ob_clean();
+ 	//ini_set('display_errors', 0);
+	Load::lib("MPDF57/mpdf");
+	$mpdf=new mPDF("utf-8");
+	$mpdf->justifyB4br = true;
+	
+	
+	$stylesheet = file_get_contents(APP_PATH.'../public/css/kumbia.css'); // external css
+	$mpdf->WriteHTML($stylesheet,1);		
+
+	$mpdf->WriteHTML($html);
+
+	
+	if(isset($nombrefichero))
+		$mpdf->Output(APP_PATH."../public/files/$nombrefichero.pdf","F");
+	else
+		$mpdf->Output("informe.pdf","I");
+	//exit(0);
+?>
