@@ -24,7 +24,7 @@ class Img {
 	}
 	private function crearCarpeta($carpeta){
 		if (!file_exists($carpeta)) {
-			mkdir($carpeta, 0777, true);
+			mkdir($carpeta, 0755, true);
 		}
 	}
 	
