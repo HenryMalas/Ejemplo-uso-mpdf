@@ -1,17 +1,17 @@
 <?php
 
 
-Class imgController extends AppController{
+class ImgController extends AppController{
 	
 
 	public function large($imagen){
-		$ima = (new img())->todo("large",$imagen);
-		view::select(null,null);
+		$ima = (new Img())->todo("large",$imagen);
+		View::select(null,null);
 	}
 	
 	public function m($imagen){
-		$ima = (new img())->todo("m",$imagen);
-		view::select(null,null);
+		$ima = (new Img())->todo("m",$imagen);
+		View::select(null,null);
 	}
 	
 }

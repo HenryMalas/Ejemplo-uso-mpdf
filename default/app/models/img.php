@@ -1,7 +1,7 @@
 <?php
 
 
-Class img {	
+class Img {	
 	var $tamanios = array (
 							"large"=>"800x600",
 							"xlarge"=>"1024x768",
